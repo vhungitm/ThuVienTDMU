@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<Models.ViewModel.PhieuMuonViewModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Phiếu Mượn";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    Phiếu Mượn
+}
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/PhieuMuonController.js"></script>
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <span class="m-0 font-weight-bold text-primary">
+            Danh Phiếu Mượn
+        </span>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            @using (Html.BeginForm("Index", "PhieuMuon", FormMethod.Get))
+            {
+                <div style="padding: 3px; margin-bottom: 20px; width: 24.5rem">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Từ khóa" name="TimKiem" value="@ViewBag.TimKiem">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên Sinh Viên</th>
+                        <th>Tên Nhân Viên</th>
+                        <th>Tên Sách</th>
+                        <th>Ngày Mượn</th>
+                        <th>Ngày Trả</th>
+                        <th>Trạng Thái Trả</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.MaPM</td>
+                        <td>@item.TenSV</td>
+                        <td>@item.TenNV</td>
+                        <td>@item.TenSach</td>
+                        <td>@item.NgayMuon.ToString("dd/MM/yyyy")</td>
+                        <td>@(item.NgayTra == null ? "" : item.NgayTra.ToString("dd/MM/yyyy"))</td>
+                        <td>
+                            <a name="TrangThai" data-id="@item.MaPM" href="#" class="@(item.TrangThai == true ? "btn btn-primary" : "btn btn-danger")">
+                                @(item.TrangThai == true ? "Kích hoạt" : "Khóa")
+                            </a>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Trang => Url.Action("Index", new { Trang, TimKiem = @ViewBag.TimKiem }))
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+E:\MVC\ThuVien\Models\bin\Debug\Models.dll.config
+E:\MVC\ThuVien\Models\bin\Debug\Models.dll
+E:\MVC\ThuVien\Models\bin\Debug\Models.pdb
+E:\MVC\ThuVien\Models\bin\Debug\EntityFramework.dll
+E:\MVC\ThuVien\Models\bin\Debug\EntityFramework.SqlServer.dll
+E:\MVC\ThuVien\Models\bin\Debug\EntityFramework.xml
+E:\MVC\ThuVien\Models\bin\Debug\EntityFramework.SqlServer.xml
+E:\MVC\ThuVien\Models\obj\Debug\Models.csprojAssemblyReference.cache
+E:\MVC\ThuVien\Models\obj\Debug\Models.csproj.CopyComplete
+E:\MVC\ThuVien\Models\obj\Debug\Models.dll
+E:\MVC\ThuVien\Models\obj\Debug\Models.pdb
+E:\MVC\ThuVien\Models\bin\Debug\PagedList.dll
+E:\MVC\ThuVien\Models\bin\Debug\PagedList.Mvc.dll
+E:\MVC\ThuVien\Models\bin\Debug\PagedList.xml
+E:\MVC\ThuVien\Models\bin\Debug\PagedList.Mvc.xml

@@ -1,0 +1,99 @@
+﻿@model Models.EF.Sach
+
+@{
+    ViewBag.Title = "Thêm Mới Sách";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    Sách
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm Mới</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("ThemMoi", "Sach", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label>Tên Sách</label>
+                        @Html.TextBoxFor(model => model.TenSach, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TenSach)
+                    </div>
+                    <div class="col">
+                        <label>Loại Sách</label>
+                        @Html.DropDownListFor(model => model.MaLoai, null, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaLoai)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Hình Ảnh</label>
+                @Html.TextBoxFor(model => model.HinhAnh, new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(model => model.HinhAnh)
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label>Tác giả</label>
+                        @Html.TextBoxFor(model => model.TacGia, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TacGia)
+                    </div>
+                    <div class="col">
+                        <label>Nhà Xuất Bản</label>
+                        @Html.DropDownListFor(model => model.MaNXB, null, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaNXB)
+                    </div>
+                    <div class="col">
+                        <label>Năm Xuất Bản</label>
+                        @Html.TextBoxFor(model => model.NamXuatBan, new { @class = "form-control", @required = "required", @type = "number" })
+                        @Html.ValidationMessageFor(model => model.NamXuatBan)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label>Số lượng bản sao</label>
+                        @Html.TextBoxFor(model => model.SoLuongBanSao, new { @class = "form-control", @required = "required", @type = "number"})
+                        @Html.ValidationMessageFor(model => model.SoLuongBanSao)
+                    </div>
+                    <div class="col">
+                        <label>Số trang</label>
+                        @Html.TextBoxFor(model => model.SoTrang, new { @class = "form-control", @required = "required", @type = "number" })
+                        @Html.ValidationMessageFor(model => model.SoTrang)
+                    </div>
+
+                    <div class="col">
+                        <label>Kích thước</label>
+                        @Html.TextBoxFor(model => model.KichThuoc, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.KichThuoc)
+                    </div>
+
+                    <div class="col">
+                        <label>Trọng lượng</label>
+                        @Html.TextBoxFor(model => model.TrongLuong, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TrongLuong)
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>Chi tiết</label>
+                @Html.TextBoxFor(model => model.ChiTiet, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ChiTiet)
+            </div>
+
+            <div class="form-group">
+                <center>
+                    <input type="submit" value="Hoàn thành" class="btn btn-primary" />
+                </center>
+            </div>
+        }
+    </div>
+</div>

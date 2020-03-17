@@ -1,0 +1,45 @@
+﻿@model Models.EF.NhaXuatBan
+
+@{
+    ViewBag.Title = "Thêm Mới Nhà Xuất Bản";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    Nhà Xuất Bản
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm Mới</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("ThemMoi", "NhaXuatBan", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label>Tên Nhà Xuất Bản</label>
+                        @Html.TextBoxFor(model => model.TenNXB, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TenNXB)
+                    </div>
+                    <div class="col">
+                        <label>Địa Chỉ</label>
+                        @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.DiaChi)
+                    </div>
+                    <div class="col">
+                        <label>Số Điện Thoại</label>
+                        @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.SDT)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <center>
+                    <input type="submit" value="Hoàn thành" class="btn btn-primary" />
+                </center>
+            </div>
+        }
+    </div>
+</div>

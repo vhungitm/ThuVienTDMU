@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<Models.EF.NguoiDung>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Người Dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    Người Dùng
+}
+@section jsFooter{
+    <script src="~/Assets/Admin/js/controller/NguoiDungController.js"></script>
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <span class="m-0 font-weight-bold text-primary">
+            Danh sách
+            <span style="float: right">
+
+                <a href="/Admin/NguoiDung/ThemMoi" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">Thêm mới</span>
+                </a>
+
+            </span>
+        </span>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            @using (Html.BeginForm("Index", "NguoiDung", FormMethod.Get))
+            {
+                <div style="padding: 3px; margin-bottom: 20px; width: 24.5rem">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Từ khóa" name="TimKiem" value="@ViewBag.TimKiem">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tài khoản</th>
+                    <th>Quyền</th>
+                    <th>Trạng Thái</th>
+                    <th style="text-align: center">Công cụ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var Quyen = "";
+                    if(item.Quyen == "SinhVien")
+                    {
+                        Quyen = "Sinh Viên";
+                    }
+                    else if(item.Quyen == "NhanVien")
+                    {
+                        Quyen = "Nhân Viên";
+                    }
+                    else
+                    {
+                        Quyen = item.Quyen;
+                    }
+
+                    <tr>
+                        <td>@item.TaiKhoan</td>
+                        <td>@Quyen</td>
+
+                        <td>
+                            <a name="TrangThai" data-id="@item.TaiKhoan" href="#" class="@(item.TrangThai == true ? "btn btn-primary" : "btn btn-danger")">
+                                @(item.TrangThai == true ? "Kích hoạt" : "Khóa")
+                            </a>
+                        </td>
+                        <td align="center">
+                            <a href="/Admin/NguoiDung/CapNhat/@item.TaiKhoan" class="btn btn-primary btn-circle btn-sm" title="Sửa">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="/Admin/NguoiDung/Xoa/@item.TaiKhoan" class="btn btn-danger btn-circle btn-sm" title="Xóa" data-toggle="modal" data-target="#XoaNguoiDung-@item.TaiKhoan">
+                                <i class="fas fa-trash"></i>
+                            </a>
+
+                            <div class="modal fade" id="XoaNguoiDung-@item.TaiKhoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Xóa Người Dùng</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Xóa người dùng này khỏi CSDL?</div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                                            <a class="btn btn-primary" href="/Admin/NguoiDung/Xoa/@item.TaiKhoan">Xóa</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Trang => Url.Action("Index", new { Trang, TimKiem = @ViewBag.TimKiem }))
+        </div>
+    </div>
+</div>
